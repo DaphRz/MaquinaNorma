@@ -76,37 +76,37 @@ def menu():
     
     # Dicionário organizando as opções de macros: nome, (descrição, qtd_parametros)
     operacoes = {
-        "1":  ("SOMA", "A := A + B", 2),
-        "2":  ("MULTIPLICAÇÃO", "A := A * B", 2),
-        "3":  ("FATORIAL", "A := A!", 1),
-        "4":  ("MENOR QUE", "A < B", 2),
-        "5":  ("DIV. INTEIRA É ZERO", "A // B == 0", 2),
-        "6":  ("NÚMERO PRIMO", "A é primo", 1),
-        "7":  ("POTÊNCIA", "C := A^B", 2),
-        "8":  ("FIBONACCI", "A := fib(A)", 1),
-        "9":  ("DIV. COM RESTO", "C := A//B, D := A%B", 2),
-        "10": ("MDC", "C := mdc(A, B)", 2),
-        "11": ("COEF. BINOMIAL", "C := binomial(A, B)", 2),
+        "1":  ("SOMA", "A := A + B", 2),                       # Brenno
+        "2":  ("MULTIPLICAÇÃO", "A := A * B", 2),              # Daphne
+        "3":  ("FATORIAL", "A := A!", 1),                      # Isabel
+        "4":  ("MENOR QUE", "A < B", 2),                       # Maria
+        "5":  ("DIV. INTEIRA É ZERO", "A // B == 0", 2),       # Brenno  
+        "6":  ("NÚMERO PRIMO", "A é primo", 1),                # Daphne
+        "7":  ("POTÊNCIA", "C := A^B", 2),                     # Isabel
+        "8":  ("FIBONACCI", "A := fib(A)", 1),                 # Maria
+        "9":  ("DIV. COM RESTO", "C := A//B, D := A%B", 2),    # Brenno       
+        "10": ("MDC", "C := mdc(A, B)", 2),                    # Daphne
+        "11": ("COEF. BINOMIAL", "C := binomial(A, B)", 2),    # Isabel
         "0":  ("SAIR", "Encerrar a máquina", 0)
     }
 
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         # Imprimindo Menu Formatado
-        print("╔══════════════════════════════════════════════════════╗")
-        print("║                    MÁQUINA NORMA                     ║")
-        print("╠══════════════════════════════════════════════════════╣")
-        print("║ OPERAÇÕES DISPONÍVEIS:                               ║")
-        print("║                                                      ║")
+        print("╔═══════════════════════════════════════════════════════╗")
+        print("║                    MÁQUINA NORMA                      ║")
+        print("╠═══════════════════════════════════════════════════════╣")
+        print("║ OPERAÇÕES DISPONÍVEIS:                                ║")
+        print("║                                                       ║")
         
         
         for key, (nome, desc, _) in operacoes.items():
             if key != "0":
-                print(f"║  [{key.rjust(2)}] {nome.ljust(22)}  ➜ {desc.ljust(21)}║")
+                print(f"║  [{key.rjust(2)}] {nome.ljust(22)}  ➜  {desc.ljust(21)}║")
         
-        print("║                                                      ║")
-        print(f"║  [ 0] {operacoes['0'][0].ljust(22)}  ➜ {operacoes['0'][1].ljust(21)}║")
-        print("╚══════════════════════════════════════════════════════╝")
+        print("║                                                       ║")
+        print(f"║  [ 0] {operacoes['0'][0].ljust(22)}  ➜  {operacoes['0'][1].ljust(21)}║")
+        print("╚═══════════════════════════════════════════════════════╝")
         
         # Solicitando operação
         op = input("\n> Digite a operação desejada: ").strip()
