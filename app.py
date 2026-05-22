@@ -75,8 +75,10 @@ def menu():
     maq = MaquinaNorma()
     
     # Dicionário organizando as opções de macros: nome, (descrição, qtd_parametros)
+    # DPS ADICINAR DESCRICAO EM TEXTO NA TUPLA IGUAL AO MATERIAL DELE
+    # ex: A := A + B usando C, onde o registrador C armazena a soma, A e B ficam zerados.
     operacoes = {
-        "1":  ("SOMA", "A := A + B", 2),                       # Brenno
+        "1":  ("SOMA", "C := A + B", 2),                       # Brenno
         "2":  ("MULTIPLICAÇÃO", "A := A * B", 2),              # Daphne
         "3":  ("FATORIAL", "A := A!", 1),                      # Gabriel
         "4":  ("MENOR QUE", "A < B", 2),                       # Isabel
