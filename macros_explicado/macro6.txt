@@ -1,0 +1,109 @@
+# Inicializa Registrador de Resultado F em 0
+1 SE zero(F) VP 3 SENÃO VP 2
+2 sub(F) VP 1
+
+# FASE 1: Copiar A para B preservando A (usando D como auxiliar)
+# Zera B e D por precaução
+3 SE zero(B) VP 5 SENÃO VP 4
+4 sub(B) VP 3
+5 SE zero(D) VP 7 SENÃO VP 6
+6 sub(D) VP 5
+
+# Transfere A para B e D
+7 SE zero(A) VP 11 SENÃO VP 8
+8 sub(A) VP 9
+9 add(B) VP 10
+10 add(D) VP 7
+
+# Restaura A a partir de D (A volta a ter seu valor original)
+11 SE zero(D) VP 14 SENÃO VP 12
+12 sub(D) VP 13
+13 add(A) VP 11
+
+# FASE 2: Tratar Casos Base (A = 0 e A = 1)
+# Se B (que é igual a A) for 0, finaliza com F=0.
+14 SE zero(B) VP 0 SENÃO VP 15
+# Subtrai 1 de B. Se B agora for 0 (ou seja, A era 1), finaliza com F=0.
+15 sub(B) VP 16
+16 SE zero(B) VP 0 SENÃO VP 17
+
+# FASE 3: Loop Principal - B agora vale (A - 1)
+# Zera E e D para copiar B e testar se B == 1
+17 SE zero(E) VP 19 SENÃO VP 18
+18 sub(E) VP 17
+19 SE zero(D) VP 21 SENÃO VP 20
+20 sub(D) VP 19
+
+# Copia B para E e D
+21 SE zero(B) VP 25 SENÃO VP 22
+22 sub(B) VP 23
+23 add(E) VP 24
+24 add(D) VP 21
+
+# Restaura B a partir de D
+25 SE zero(D) VP 28 SENÃO VP 26
+26 sub(D) VP 27
+27 add(B) VP 25
+
+# Verifica se B == 1 olhando para E (subtrai 1 de E e checa se zerou)
+28 sub(E) VP 29
+29 SE zero(E) VP 30 SENÃO VP 31
+# Se E zerou, significa que B era 1. Nenhum divisor exato foi encontrado!
+30 add(F) VP 0 # F=1 (É Primo) e encerra (Vai para 0)
+
+# Se E não zerou (B > 1), limpa E para o próximo uso
+31 SE zero(E) VP 33 SENÃO VP 32
+32 sub(E) VP 31
+
+# FASE 4: Prepara o Teste de Divisão (C = A mod B)
+# Zera C e D e copia A para C (nosso dividendo nesta iteração)
+33 SE zero(C) VP 35 SENÃO VP 34
+34 sub(C) VP 33
+35 SE zero(D) VP 37 SENÃO VP 36
+36 sub(D) VP 35
+
+37 SE zero(A) VP 41 SENÃO VP 38
+38 sub(A) VP 39
+39 add(C) VP 40
+40 add(D) VP 37
+
+# Restaura A a partir de D
+41 SE zero(D) VP 44 SENÃO VP 42
+42 sub(D) VP 43
+43 add(A) VP 41
+
+# FASE 5: Recarregar Divisor E copiando B
+# Ponto de retorno para subtrair múltiplos de B. Zera E e D.
+44 SE zero(E) VP 46 SENÃO VP 45
+45 sub(E) VP 44
+46 SE zero(D) VP 48 SENÃO VP 47
+47 sub(D) VP 46
+
+# Copia B para E e D
+48 SE zero(B) VP 52 SENÃO VP 49
+49 sub(B) VP 50
+50 add(E) VP 51
+51 add(D) VP 48
+
+# Restaura B
+52 SE zero(D) VP 55 SENÃO VP 53
+53 sub(D) VP 54
+54 add(B) VP 52
+
+# FASE 6: Subtração Simultânea (Simula C mod E)
+55 SE zero(C) VP 60 SENÃO VP 56
+
+# Se C não é zero, verificamos E
+56 SE zero(E) VP 44 SENÃO VP 57
+# C != 0 e E == 0: Subtraímos um "B" inteiro. Volta para 44 para recarregar E com B.
+# C != 0 e E != 0: Subtrai 1 de C e de E.
+57 sub(C) VP 58
+58 sub(E) VP 55
+
+# Se C chegou a 0, checamos E
+60 SE zero(E) VP 0 SENÃO VP 61
+# C == 0 e E == 0: Divisão exata! (A é divisível por B). Como F=0, não é primo. Encerra (VP 0).
+
+# C == 0 e E != 0: Sobrou resto. A não é perfeitamente divisível por B.
+# Diminuímos o divisor B em 1 e voltamos para o início do Loop Principal.
+61 sub(B) VP 17
