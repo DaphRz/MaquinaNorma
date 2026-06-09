@@ -3,7 +3,7 @@
 
 # Operações
 
-1. Soma — Brenno  
+1. Soma — Brenno  ✅
    `A := A + B`
 
 2. Multiplicação — Daphne  
@@ -18,7 +18,7 @@
 5. Divisão Inteira é Zero — Maria  
    `A // B == 0`
 
-6. Número Primo — Brenno  
+6. Número Primo — Brenno  ✅
    `A é primo`
 
 7. Potência — Daphne  
