@@ -11,7 +11,11 @@ class MaquinaNorma:
             "E": 0,
             "F": 0,
             "G": 0,
-            "H": 0
+            "H": 0,
+            "I": 0,
+            "K": 0,
+            "M": 0,
+            "T": 0,
         }
         self.macros = []
         # Carregando as macros dos arquivos
@@ -75,7 +79,7 @@ def menu():
     maq = MaquinaNorma()
     
     # Dicionário organizando as opções de macros: nome, (descrição, qtd_parametros)
-    # DPS ADICINAR DESCRICAO EM TEXTO NA TUPLA IGUAL AO MATERIAL DELE
+    # DPS ADICINAR DESCRICAO MELHOR EM TEXTO NA TUPLA IGUAL AO MATERIAL DELE
     # ex: A := A + B usando C, onde o registrador C armazena a soma, A e B ficam zerados.
     operacoes = {
         "1":  ("SOMA", "C := A + B", 2),                       # Brenno
@@ -147,6 +151,7 @@ def menu():
         print("═" * 56)
         print(f"  [A] = {str(regs['A']).ljust(8)} [B] = {str(regs['B']).ljust(8)} [C] = {str(regs['C']).ljust(8)} [D] = {str(regs['D']).ljust(8)}")
         print(f"  [E] = {str(regs['E']).ljust(8)} [F] = {str(regs['F']).ljust(8)} [G] = {str(regs['G']).ljust(8)} [H] = {str(regs['H']).ljust(8)}")
+        print(f"  [I] = {str(regs['I']).ljust(8)} [K] = {str(regs['K']).ljust(8)} [M] = {str(regs['M']).ljust(8)} [T] = {str(regs['T']).ljust(8)}")
         print("═" * 56)
 
         input("\nPressione Enter para continuar...")
