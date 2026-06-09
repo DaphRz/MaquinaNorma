@@ -33,5 +33,5 @@
 10. MDC — Maria  
     `C := mdc(A, B)`
 
-11. Coeficiente Binomial — Brenno  
+11. Coeficiente Binomial — Brenno  ✅  
     `C := binomial(A, B)`
