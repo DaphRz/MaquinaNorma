@@ -1,0 +1,126 @@
+# Zera todos os registradores auxiliares que serão usados (Garante estado limpo)
+1 SE zero(C) VP 3 SENÃO VP 2
+2 sub(C) VP 1
+3 SE zero(T) VP 5 SENÃO VP 4
+4 sub(T) VP 3
+5 SE zero(I) VP 7 SENÃO VP 6
+6 sub(I) VP 5
+7 SE zero(K) VP 9 SENÃO VP 8
+8 sub(K) VP 7
+9 SE zero(M) VP 11 SENÃO VP 10
+10 sub(M) VP 9
+11 SE zero(D) VP 13 SENÃO VP 12
+12 sub(D) VP 11
+13 SE zero(E) VP 15 SENÃO VP 14
+14 sub(E) VP 13
+15 SE zero(F) VP 17 SENÃO VP 16
+16 sub(F) VP 15
+
+# Inicializa C = 1 e I = 1
+17 add(C) VP 18
+18 add(I) VP 19
+
+# Copia B para K e D
+19 SE zero(B) VP 23 SENÃO VP 20
+20 sub(B) VP 21
+21 add(K) VP 22
+22 add(D) VP 19
+# Restaura B a partir de D
+23 SE zero(D) VP 26 SENÃO VP 24
+24 sub(D) VP 25
+25 add(B) VP 23
+
+# Copia A para T e D
+26 SE zero(A) VP 30 SENÃO VP 27
+27 sub(A) VP 28
+28 add(T) VP 29
+29 add(D) VP 26
+# Restaura A a partir de D
+30 SE zero(D) VP 33 SENÃO VP 31
+31 sub(D) VP 32
+32 add(A) VP 30
+
+# Faz T = A - B (Copiando B para E e D para subtrair D de T)
+33 SE zero(B) VP 37 SENÃO VP 34
+34 sub(B) VP 35
+35 add(D) VP 36
+36 add(E) VP 33
+# Restaura B a partir de E
+37 SE zero(E) VP 40 SENÃO VP 38
+38 sub(E) VP 39
+39 add(B) VP 37
+# Subtrai D de T (Realiza o A - B)
+40 SE zero(D) VP 43 SENÃO VP 41
+41 sub(D) VP 42
+42 sub(T) VP 40
+
+# Faz T = (A - B) + 1
+43 add(T) VP 44
+
+# === LOOP PRINCIPAL ===
+# Verifica se o contador K == 0. Se sim, C já tem a combinação final!
+44 SE zero(K) VP 0 SENÃO VP 45
+
+# --- INÍCIO DA MULTIPLICAÇÃO (M = C * T) ---
+# Zera M
+45 SE zero(M) VP 47 SENÃO VP 46
+46 sub(M) VP 45
+# Copia C para E e D
+47 SE zero(C) VP 51 SENÃO VP 48
+48 sub(C) VP 49
+49 add(E) VP 50
+50 add(D) VP 47
+# Restaura C
+51 SE zero(D) VP 54 SENÃO VP 52
+52 sub(D) VP 53
+53 add(C) VP 51
+
+# Loop da Multiplicação: Soma T a M repetidas vezes (E vezes)
+54 SE zero(E) VP 66 SENÃO VP 55
+55 sub(E) VP 56
+# Copia T para F e D
+56 SE zero(T) VP 60 SENÃO VP 57
+57 sub(T) VP 58
+58 add(F) VP 59
+59 add(D) VP 56
+# Restaura T
+60 SE zero(D) VP 63 SENÃO VP 61
+61 sub(D) VP 62
+62 add(T) VP 60
+# Move F para M
+63 SE zero(F) VP 54 SENÃO VP 64
+64 sub(F) VP 65
+65 add(M) VP 63
+
+# --- INÍCIO DA DIVISÃO (C = M / I) ---
+# Zera C para poder receber o quociente da divisão
+66 SE zero(C) VP 68 SENÃO VP 67
+67 sub(C) VP 66
+
+# Loop da Divisão: Enquanto M != 0
+68 SE zero(M) VP 81 SENÃO VP 69
+# Copia I para E e D
+69 SE zero(I) VP 73 SENÃO VP 70
+70 sub(I) VP 71
+71 add(E) VP 72
+72 add(D) VP 69
+# Restaura I
+73 SE zero(D) VP 76 SENÃO VP 74
+74 sub(D) VP 75
+75 add(I) VP 73
+
+# Subtrai o divisor I (agora em E) de M iterativamente
+76 SE zero(E) VP 80 SENÃO VP 77
+77 SE zero(M) VP 81 SENÃO VP 78
+78 sub(M) VP 79
+79 sub(E) VP 76
+# Completou uma subtração exata de I, incrementa o quociente C
+80 add(C) VP 68
+
+# --- ATUALIZAÇÃO DAS VARIÁVEIS ---
+# T := T + 1
+81 add(T) VP 82
+# I := I + 1
+82 add(I) VP 83
+# K := K - 1. E volta para checar a condição do Loop Principal
+83 sub(K) VP 44
