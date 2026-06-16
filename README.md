@@ -27,7 +27,7 @@
 8. Fibonacci — Gabriel  
    `A := fib(A)`
 
-9. Divisão com Resto — Isabel  
+9. Divisão com Resto — Isabel  ✅
    `C := A//B, D := A%B`
 
 10. MDC — Maria  
