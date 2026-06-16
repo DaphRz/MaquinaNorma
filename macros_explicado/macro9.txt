@@ -1,0 +1,120 @@
+# Divisão inteira com resto
+# Entrada:
+# A = dividendo
+# B = divisor
+# C = quociente
+# D = resto
+# E, F, G e H são registradores auxiliares e ficam zerados ao final.
+
+# 1-2 verifica se C é zero e subtrai ele até zerar
+1 SE zero(C) VP 3 SENÃO VP 2
+2 sub(C) VP 1
+
+# 3-4 verifica se D é zero e subtrai ele até zerar
+3 SE zero(D) VP 5 SENÃO VP 4
+4 sub(D) VP 3
+
+# 5-6 verifica se E é zero e subtrai ele até zerar
+5 SE zero(E) VP 7 SENÃO VP 6
+6 sub(E) VP 5
+
+# 7-8 verifica se F é zero e subtrai ele até zerar
+7 SE zero(F) VP 9 SENÃO VP 8
+8 sub(F) VP 7
+
+# 9-10 verifica se G é zero e subtrai ele até zerar
+9 SE zero(G) VP 11 SENÃO VP 10
+10 sub(G) VP 9
+
+# 11-12 verifica se H é zero e subtrai ele até zerar
+11 SE zero(H) VP 13 SENÃO VP 12
+12 sub(H) VP 11
+
+# 13 verifica se A é zero
+# se for, o quociente e resto já são zero e encerra
+13 SE zero(A) VP 0 SENÃO VP 14
+
+# 14 verifica se B é zero
+# evita divisão por zero encerrando a operação
+14 SE zero(B) VP 0 SENÃO VP 15
+
+# 15-17 transfere A para E, zerando A
+15 SE zero(A) VP 18 SENÃO VP 16
+16 sub(A) VP 17
+17 add(E) VP 15
+
+# 18-21 restaura A usando E e cria uma cópia em F
+# ao final A volta ao valor original, F recebe A e E zerado
+18 SE zero(E) VP 22 SENÃO VP 19
+19 sub(E) VP 20
+20 add(A) VP 21
+21 add(F) VP 18
+
+# 22-24 transfere B para E, zerando B
+22 SE zero(B) VP 25 SENÃO VP 23
+23 sub(B) VP 24
+24 add(E) VP 22
+
+# 25-29 restaura B usando E
+# cria cópias de B em G e H e zera E
+25 SE zero(E) VP 30 SENÃO VP 26
+26 sub(E) VP 27
+27 add(B) VP 28
+28 add(G) VP 29
+29 add(H) VP 25
+
+# 30-32 realiza uma subtração em F e G
+# E conta quantas subtrações foram feitas
+30 sub(F) VP 31
+31 sub(G) VP 32
+32 add(E) VP 33
+
+# 33-34 verifica o resultado da subtração simultânea e envia para o devido resultado devido
+33 SE zero(F) VP 34 SENÃO VP 47
+34 SE zero(G) VP 35 SENÃO VP 40
+
+# 35-39 F e G chegaram a zero ao mesmo tempo
+# foi possível subtrair exatamente um divisor
+# incrementa o quociente e encerra a operação zerando os auxiliares
+35 add(C) VP 36
+36 SE zero(H) VP 38 SENÃO VP 37
+37 sub(H) VP 36
+38 SE zero(E) VP 0 SENÃO VP 39
+39 sub(E) VP 38
+
+# 40-46 F chegou a zero mas G não
+# significa que sobrou parte do divisor
+# E contém o resto da divisão então tranfere para D zerando E
+40 SE zero(E) VP 43 SENÃO VP 41
+41 add(D) VP 42
+42 sub(E) VP 40
+# zera H
+43 SE zero(H) VP 45 SENÃO VP 44
+44 sub(H) VP 43
+# zera G e encerra
+45 SE zero(G) VP 0 SENÃO VP 46
+46 sub(G) VP 45
+
+# 47 verifica se G chegou a zero depois de F não ser zero
+# se não chegou continua a subtração simultânea
+47 SE zero(G) VP 48 SENÃO VP 30
+
+# 48-49 zera E para preparar a próxima iteração
+48 SE zero(E) VP 50 SENÃO VP 49
+49 sub(E) VP 48
+
+# 50-52 transfere H (que tem B armazenado) para E
+50 SE zero(H) VP 53 SENÃO VP 51
+51 sub(H) VP 52
+52 add(E) VP 50
+
+# 53-56 restaura G e H a partir de E (valor de B) e zera E
+# restaurando o valor original do divisor
+53 SE zero(E) VP 57 SENÃO VP 54
+54 sub(E) VP 55
+55 add(H) VP 56
+56 add(G) VP 53
+
+# 57 incrementa o quociente
+# e inicia uma nova tentativa de subtrair o divisor
+57 add(C) VP 30
