@@ -1,0 +1,53 @@
+# Teste A < B usando C, D e E
+# Resultados:
+# C = 1 se A < B
+# C = 0 se A >= B
+# A e B são restaurados ao final.
+# D e E são usados como auxiliares e zerados no fim.
+
+# 1-2 verifica se C é zero e subtrai ele até zerar
+1 SE zero(C) VP 3 SENÃO VP 2
+2 sub(C) VP 1
+
+# 3-4 verifica se D é zero e subtrai ele até zerar
+3 SE zero(D) VP 5 SENÃO VP 4
+4 sub(D) VP 3
+
+# 5-6 verifica se E é zero e subtrai ele até zerar
+5 SE zero(E) VP 7 SENÃO VP 6
+6 sub(E) VP 5
+
+# 7-9 transfere A para D, zerando A
+7 SE zero(A) VP 10 SENÃO VP 8
+8 sub(A) VP 9
+9 add(D) VP 7
+
+# 10-12 transfere B para E, zerando B
+10 SE zero(B) VP 13 SENÃO VP 11
+11 sub(B) VP 12
+12 add(E) VP 10
+
+# 13-18 Transfere de D para A e de E para B até que D ou E sejam zerados
+13 SE zero(D) VP 19 SENÃO VP 14
+14 add(A) VP 15
+15 sub(D) VP 16
+16 SE zero(E) VP 24 SENÃO VP 17
+17 add(B) VP 18
+18 sub(E) VP 13
+
+# 19-20 D chegou a zero
+# se E também for zero então A = B, C se mantem 0 e encerra operação
+# se E for diferente de zero então A < B, C vai para 1
+19 SE zero(E) VP 0 SENÃO VP 20
+20 add(C) VP 21
+
+# 21-23 continua restarundo B e zerando E e então encerra operação
+21 SE zero(E) VP 0 SENÃO VP 22
+22 add(B) VP 23
+23 sub(E) VP 21
+
+# 24-26 E chegou a zero antes de D
+# restarundo A e zerando D e então encerra operação
+24 SE zero(D) VP 0 SENÃO VP 25
+25 add(A) VP 26
+26 sub(D) VP 24
