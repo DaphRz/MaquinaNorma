@@ -12,7 +12,7 @@
 3. Fatorial — Gabriel  
    `A := A!`
 
-4. Menor Que — Isabel  
+4. Menor Que — Isabel  ✅  
    `A < B`
 
 5. Divisão Inteira é Zero — Maria  
