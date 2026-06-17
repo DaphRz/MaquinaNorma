@@ -8,7 +8,7 @@ py app.py
 # Operações
 
 1. Soma — Brenno  ✅  
-   `A := A + B`
+   `C := A + B`
 
 2. Multiplicação — Daphne  ✅  
    `A := A * B`
