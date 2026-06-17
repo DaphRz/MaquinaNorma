@@ -52,7 +52,7 @@ class MaquinaNorma:
         self.registradores["B"] = b
 
         linha_atual = 1
-        print(f"({self.registradores['A']}, {self.registradores['B']}, {self.registradores['C']}, {self.registradores['D']}), M) -> Entrada de DaDOS")
+        print(f"\n({self.registradores['A']}, {self.registradores['B']}, {self.registradores['C']}, {self.registradores['D']}), M) -> Entrada de DaDOS")
         
         while linha_atual != 0:
             instrucao = macro[linha_atual - 1]
@@ -140,7 +140,7 @@ def menu():
         print(f"\n--- {nome_op} - {desc_op} ---")
         
         try:
-            a = int(input("> Digite o valor de A: "))
+            a = int(input("\n> Digite o valor de A: "))
             b = 0
             if qtd_params == 2:
                 b = int(input("> Digite o valor de B: "))

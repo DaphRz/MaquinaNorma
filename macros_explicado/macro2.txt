@@ -1,0 +1,29 @@
+# A := A * B usando C , D, onde o registrador A armazena o produto, B tem seu valor restaurado, C e D ficam zerados.
+
+# Se o A for 0, ele não precisa atribuir valor ao C - se não for, entra no Loop-1
+1 ZER A 4 2 
+
+# Loop-1: Atribuir o valor de A em C
+2 ADD C 3
+3 SUB A 1
+
+# Se o C for 0, ele encerra o programa (C = A) - pois qualquer número multiplicado por 0, dá 0 - se não for, entra no Loop-2
+4 ZER C 0 5 
+
+# Loop-2: Se B for 0, ele confere o valor de D (linha 9) - se não for, ele entra no Loop-3
+5 ZER B 9 6
+
+# Loop-3: Adiciona em A e D até que A = B = D
+6 ADD A 7
+7 ADD D 8
+8 SUB B 5
+
+# Se D for 0, ele decrementa C (C = A) até que o valor seja 0 - caso contrário, entra no Loop-4
+9 ZER D 12 10
+
+# Loop 4: Reatribui o valor de B, zerando D
+10 ADD B 11
+11 SUB D 9
+
+# Marca quantas Repetições de Soma são necessárias
+12 SUB C 4

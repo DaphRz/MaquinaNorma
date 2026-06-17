@@ -1,0 +1,42 @@
+# Potência C := A^B (usando os registradores D, E, F, G)
+
+# Inicializa C com 1 (pois A⁰ = 1)
+1 ADD C 2
+
+# Copiar o expoente B para o contador E, preservando B com o auxílio de F
+2 ZER B 6 3
+3 ADD E 4
+4 ADD F 5
+5 SUB B 2
+6 ZER F 9 7
+7 ADD B 8
+8 SUB F 6
+
+# Loop Principal da Potência (executa B vezes)
+9 ZER E 0 10
+
+# Neste Loop, iremos fazer C := C * A
+
+# Movemos o valor de C para D (multiplicador) 
+# C fica zerado para acumular o resultado das multiplicações
+10 ZER C 13 11
+11 ADD D 12
+12 SUB C 10
+
+# Somamos o valor de A em C, D (D = B) vezes - Multiplicação por Somas Sucessivas
+13 ZER D 22 14
+
+# Soma A em C, preservando o valor de A com o auxílio de G
+14 ZER A 18 15
+15 ADD C 16
+16 ADD G 17
+17 SUB A 14
+18 ZER G 21 19
+19 ADD A 20
+20 SUB G 18
+
+# D vezes
+21 SUB D 13
+
+# Decrementa o Contador do Expoente
+22 SUB E 9

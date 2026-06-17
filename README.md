@@ -6,7 +6,7 @@
 1. Soma — Brenno  ✅  
    `A := A + B`
 
-2. Multiplicação — Daphne  
+2. Multiplicação — Daphne  ✅
    `A := A * B`
 
 3. Fatorial — Gabriel  ✅    
@@ -21,7 +21,7 @@
 6. Número Primo — Brenno  ✅  
    `A é primo`
 
-7. Potência — Daphne  
+7. Potência — Daphne  ✅
    `C := A^B`
 
 8. Fibonacci — Gabriel  ✅    
