@@ -18,15 +18,18 @@ class MaquinaNorma:
             "T": 0,
         }
         self.macros = []
+        
         # Carregando as macros dos arquivos
         for i in range(1, 12):
             
             with open(f"macros/macro{i}.txt", "r") as arq:
                 print(f"Carregando macro {i}...")
                 macrotemp = []
+                
                 for line in arq:
                     print(f"Processando linha: {line.strip()}")
                     macrotemp.append(line.split())
+                    
                 print(f"Macro {i} carregada: {macrotemp}")
                 self.macros.append(macrotemp)
             
@@ -44,11 +47,13 @@ class MaquinaNorma:
     def realizar_operacao(self, macro, a, b=0):
         for reg in self.registradores:
             self.registradores[reg] = 0
+            
         self.registradores["A"] = a
         self.registradores["B"] = b
 
         linha_atual = 1
         print(f"({self.registradores['A']}, {self.registradores['B']}, {self.registradores['C']}, {self.registradores['D']}), M) -> Entrada de DaDOS")
+        
         while linha_atual != 0:
             instrucao = macro[linha_atual - 1]
             reg = instrucao[2]
@@ -59,24 +64,29 @@ class MaquinaNorma:
                 self._add(reg)
                 linha_atual = int(instrucao[3])
                 intrucao_str = f"FACA ADD ({reg}) E VA_PARA {linha_atual}"
+                
             elif instrucao[1] == "SUB":
                 self._sub(reg)
                 linha_atual = int(instrucao[3])
                 intrucao_str = f"FACA SUB ({reg}) E VA_PARA {linha_atual}"
+                
             elif instrucao[1] == "ZER":
                 if self._zero(reg):
                     linha_atual = int(instrucao[3])
                 else:
                     linha_atual = int(instrucao[4])
+                    
                 intrucao_str = f"SE ZERO ({reg}) ENTAO VA_PARA {instrucao[3]} SENAO VA_PARA {instrucao[4]}"
+                
             print(f"({self.registradores['A']}, {self.registradores['B']}, {self.registradores['C']}, {self.registradores['D']}), {linha_anterior}) -> {intrucao_str})")
             
-        
         return self.registradores
 
 
 def menu():
     maq = MaquinaNorma()
+
+    # Adicionar Opção: todas as operaeções !!!!
     
     # Dicionário organizando as opções de macros: nome, (descrição, qtd_parametros)
     # DPS ADICINAR DESCRICAO MELHOR EM TEXTO NA TUPLA IGUAL AO MATERIAL DELE
@@ -138,6 +148,7 @@ def menu():
             if a < 0 or (qtd_params == 2 and b < 0):
                 input("\nOs valores devem ser não negativos. Pressione Enter para voltar...")
                 continue
+                
         except ValueError:
             input("\nEntrada inválida. Digite apenas números inteiros. Pressione Enter...")
             continue
