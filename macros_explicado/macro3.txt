@@ -1,0 +1,87 @@
+# A := A! usando B, C, D e E como auxiliares.
+# B = contador externo (de A até 1).
+# C = resultado acumulado do fatorial.
+# D = acumulador parcial durante cada multiplicação.
+# E = cópia de B usada como contador interno da multiplicação.
+# A = resultado final (C é copiado para A ao fim).
+
+# 1-2 zera B
+1 SE zero(B) VP 3 SENÃO VP 2
+2 sub(B) VP 1
+
+# 3-4 zera C
+3 SE zero(C) VP 5 SENÃO VP 4
+4 sub(C) VP 3
+
+# 5-6 zera D
+5 SE zero(D) VP 7 SENÃO VP 6
+6 sub(D) VP 5
+
+# 7-8 zera E
+7 SE zero(E) VP 9 SENÃO VP 8
+8 sub(E) VP 7
+
+# 9-10 caso especial: 0! = 1
+# se A=0, adiciona 1 a A e encerra
+9 SE zero(A) VP 10 SENÃO VP 11
+10 add(A) VP 0
+
+# 11-13 copia A para B (contador externo = n), zerando A
+11 SE zero(A) VP 14 SENÃO VP 12
+12 sub(A) VP 13
+13 add(B) VP 11
+
+# 14 inicializa C=1 (resultado inicial: 1! ou identidade da multiplicação)
+14 add(C) VP 15
+
+# 15 laço externo: se B=0 vai para a cópia final (38); senão continua
+15 SE zero(B) VP 38 SENÃO VP 16
+
+# 16-19 copia B para D e E simultaneamente, zerando B
+# ao final: B=0, D=k, E=k (k é o valor atual do contador)
+16 SE zero(B) VP 20 SENÃO VP 17
+17 sub(B) VP 18
+18 add(D) VP 19
+19 add(E) VP 16
+
+# 20-22 restaura B a partir de D, zerando D
+# ao final: B=k, D=0, E=k
+20 SE zero(D) VP 23 SENÃO VP 21
+21 sub(D) VP 22
+22 add(B) VP 20
+
+# 23-31 laço interno: multiplica C por E, acumulando em D
+# repete E vezes: em cada repetição adiciona C a D preservando C via A
+23 SE zero(E) VP 32 SENÃO VP 24
+24 sub(E) VP 25
+
+# 25-28 adiciona C a D preservando C
+# move C para A e D ao mesmo tempo (while C>0: C--; A++; D++)
+25 SE zero(C) VP 29 SENÃO VP 26
+26 sub(C) VP 27
+27 add(A) VP 28
+28 add(D) VP 25
+
+# 29-31 restaura C a partir de A (while A>0: A--; C++)
+29 SE zero(A) VP 23 SENÃO VP 30
+30 sub(A) VP 31
+31 add(C) VP 29
+
+# ao sair do laço interno: D = C_antigo * B_antigo, C = C_antigo, E = 0
+
+# 32-33 zera C (para receber o novo resultado)
+32 SE zero(C) VP 34 SENÃO VP 33
+33 sub(C) VP 32
+
+# 34-36 copia D para C (C = novo resultado = produto acumulado)
+34 SE zero(D) VP 37 SENÃO VP 35
+35 sub(D) VP 36
+36 add(C) VP 34
+
+# 37 decrementa B (próximo multiplicador) e retorna ao laço externo
+37 sub(B) VP 15
+
+# 38-40 cópia final: transfere C para A (resultado do fatorial)
+38 SE zero(C) VP 0 SENÃO VP 39
+39 sub(C) VP 40
+40 add(A) VP 38

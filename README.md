@@ -9,7 +9,7 @@
 2. Multiplicação — Daphne  
    `A := A * B`
 
-3. Fatorial — Gabriel  
+3. Fatorial — Gabriel  ✅    
    `A := A!`
 
 4. Menor Que — Isabel  ✅  
@@ -24,7 +24,7 @@
 7. Potência — Daphne  
    `C := A^B`
 
-8. Fibonacci — Gabriel  
+8. Fibonacci — Gabriel  ✅    
    `A := fib(A)`
 
 9. Divisão com Resto — Isabel  ✅
