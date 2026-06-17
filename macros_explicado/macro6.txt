@@ -1,3 +1,4 @@
+# Verifica se A é primo com resultado em F
 # Inicializa Registrador de Resultado F em 0
 1 SE zero(F) VP 3 SENÃO VP 2
 2 sub(F) VP 1
