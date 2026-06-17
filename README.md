@@ -1,6 +1,10 @@
 # Implementação de Máquina Norma em Python
  Teoria da Computação - 2026/1 - UVV
-
+* Rodar na UVV com
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+py app.py
+```
 # Operações
 
 1. Soma — Brenno  ✅  
