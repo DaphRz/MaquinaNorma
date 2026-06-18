@@ -1,3 +1,7 @@
+# coeficiente binomial de A e B
+# A = n ; B = k
+# n > k
+# Formula : [(n-k+1)x(n-k+1)x...x(n-k+n)] / (1x2x3x...xk)
 # Zera todos os registradores auxiliares que serão usados (Garante estado limpo)
 1 SE zero(C) VP 3 SENÃO VP 2
 2 sub(C) VP 1
