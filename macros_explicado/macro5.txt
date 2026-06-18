@@ -1,0 +1,51 @@
+# Fazer Teste_mod(A,B) usando C,D,E,F,G,H
+# Ao final:
+# D = 1  -> VERDADEIRO  (A mod B = 0)
+# D = 0  -> FALSO       (A mod B ≠ 0)
+
+#passando valor de a para C e D
+1 SE ZERO(A) VP 2 SENÃO VP 3   
+2 SE ZERO(D) VP 8 SENÃO VP 6 
+3 ADD(C)  VP 4
+4 ADD(D)  VP 5
+5 SUB(A)  VP 1
+#Retornando o valor de a com D
+6 ADD(A) VP 7
+7 SUB(D) VP 2
+#passando o valor de b para F e E
+8 SE ZERO(B) VP 12 SENÃO VP 9   
+9 ADD(E) VP 10
+10 ADD(F) VP 11
+11 SUB(B) VP 8
+#retornando o valor de b com F
+12 SE ZERO(F) VP 15 SENÃO VP 13  
+13 ADD(B) VP 14
+14 SUB(F) VP 12
+#passando o valor de E para G e H
+15 SE ZERO(E) VP 19 SENÃO VP 16  
+16 ADD(G) VP 17
+17 ADD(H) VP 18
+18 SUB(E) VP 15
+#retornando o valor de E com H
+19 SE ZERO(H) VP 22 SENÃO VP 20  
+20 ADD(E) VP 21
+21 SUB(H) VP 19
+ # faz a vericação do divisor
+22 SE ZERO(E) VP 26 SENÃO VP 23  
+# se o divisor for maior que o dividendo encerra sendo falso
+23 SE ZERO(C) VP 0 SENÃO VP 24  
+24 SUB(C) VP 25            #se ainda há valores no dividendo prossegue
+25 SUB(E) VP 22
+ #verifica o valor do dividendo, caso seja 0 é pq o resultado é exato, senão enche o valor de e`novamente, e retoma o processo
+# 26: Se C for zero, a divisão é exata (D vira 1). Senão, vai reabastecer no 28.
+26 SE ZERO(C) VP 27 SENÃO VP 28  
+27 ADD(D) VP 0
+# 28 a 31: Passa o backup de G para E (divisor) e para H (temporário limpo)
+28 SE ZERO(G) VP 32 SENÃO VP 29
+29 ADD(E) VP 30
+30 ADD(H) VP 31
+31 SUB(G) VP 28
+# 32 a 34: Devolve o valor de H para G para manter o backup vivo para a próxima rodada!
+32 SE ZERO(H) VP 22 SENÃO VP 33
+33 ADD(G) VP 34
+34 SUB(H) VP 32
